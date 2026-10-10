@@ -1,0 +1,1596 @@
+<USER_REQUEST>
+BUILD A COMPLETE REAL-WORLD FULL-STACK WEB APPLICATION
+
+PROJECT TITLE:
+DIGITAL VERIFICATION USING QR CODE
+
+IMPORTANT:
+This is NOT a simple QR code generator.
+This is NOT a static frontend.
+This is NOT a fake CRUD application.
+
+Build a complete, functional, production-style digital credential verification platform.
+
+Every important button, form, API, authentication flow, QR operation, notification, email alert, dashboard statistic and database operation must actually work.
+
+Do not create fake/sample data, fake login, fake Google authentication, fake statistics, fake notifications or placeholder functionality.
+
+============================================================
+1. PROJECT PURPOSE
+============================================================
+
+The purpose of this system is to allow an authorized organization to issue digital credentials to students, employees, staff, members or participants.
+
+Each issued credential receives a unique secure verification token and QR code.
+
+When a verifier scans the QR code:
+
+QR
+↓
+Secure Verification URL
+↓
+Backend API
+↓
+MongoDB
+↓
+Credential validation
+↓
+VALID / EXPIRED / REVOKED / INVALID
+↓
+Verification record saved
+↓
+Email notification
+↓
+In-app notification
+↓
+Admin audit log
+↓
+Analytics updated
+
+The system must provide fast, secure and reliable digital credential verification.
+
+============================================================
+2. REAL-WORLD ACTORS
+============================================================
+
+Create three main actors:
+
+A. ORGANIZATION ADMIN
+B. CREDENTIAL HOLDER / USER
+C. PUBLIC VERIFIER
+
+ADMIN:
+- Manages users
+- Issues credentials
+- Manages credentials
+- Revokes credentials
+- Views verification activity
+- Views analytics
+- Views audit logs
+- Receives security alerts
+
+USER / CREDENTIAL HOLDER:
+- Registers
+- Logs in
+- Uses Google OAuth
+- Manages profile
+- Views issued credentials
+- Views QR code
+- Downloads/prints credential
+- Views verification history
+- Receives notifications
+- Receives verification emails
+
+PUBLIC VERIFIER:
+- Does not need an account
+- Scans QR
+- Verifies credential
+- Sees verification result
+- Cannot modify any credential
+
+============================================================
+3. COMPLETE SYSTEM FLOW
+============================================================
+
+Visitor
+↓
+Landing Page
+↓
+Register / Login
+↓
+Email + Password OR Google OAuth
+↓
+JWT Authentication
+↓
+User Dashboard
+↓
+Admin issues credential
+↓
+Credential stored in MongoDB
+↓
+Secure verification token generated
+↓
+QR code generated
+↓
+User views digital credential
+↓
+Verifier scans QR
+↓
+Public verification page opens
+↓
+Backend validates credential
+↓
+Result:
+VALID / EXPIRED / REVOKED / INVALID
+↓
+Verification saved in MongoDB
+↓
+Email notification sent
+↓
+In-app notification created
+↓
+Admin audit log updated
+↓
+Analytics updated
+
+============================================================
+4. TECHNOLOGY STACK
+============================================================
+
+FRONTEND:
+
+- React.js
+- Vite
+- React Router
+- Axios
+- Modern CSS
+- Recharts
+- QR code generation library
+- QR scanner library
+- i18next
+- Responsive design
+
+BACKEND:
+
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JWT
+- bcrypt/bcryptjs
+- Google OAuth 2.0
+- Nodemailer or reliable email service
+- express-validator
+- express-rate-limit
+- CORS
+- dotenv
+
+============================================================
+5. LANDING PAGE
+============================================================
+
+Create a beautiful modern professional landing page.
+
+Theme:
+- Colorful
+- Modern
+- Professional
+- Clean
+- Attractive
+- Responsive
+
+Navigation:
+
+- Home
+- How It Works
+- Features
+- Security
+- Public Verification
+- Login
+- Register
+
+Hero:
+
+DIGITAL VERIFICATION USING QR CODE
+
+Subtitle:
+
+"Secure, Fast and Reliable Digital Credential Verification"
+
+Buttons:
+
+- Verify a Credential
+- Get Started
+- Login
+
+The "Verify a Credential" button must open the public QR scanner/verification page.
+
+Add sections:
+
+1. How It Works
+2. Secure Digital Credentials
+3. QR Verification
+4. Real-Time Status Detection
+5. Verification History
+6. Notifications
+7. Analytics
+8. Security
+9. Organization Benefits
+
+============================================================
+6. USER REGISTRATION
+============================================================
+
+Create a real registration system.
+
+Fields:
+
+- Full Name
+- Email
+- Phone Number
+- Password
+- Confirm Password
+- Date of Birth
+- Gender
+- Address
+- City
+- State
+- Country
+- Profile Photo
+- User Type
+
+User Type:
+
+- Student
+- Employee
+- Staff
+- Member
+- Participant
+
+Also:
+
+- Terms and Privacy checkbox
+
+Validation is mandatory.
+
+Password must be securely hashed using bcrypt.
+
+Store user in MongoDB.
+
+Do not hardcode users.
+
+After successful registration:
+
+"Registration successful. Please login."
+
+============================================================
+7. LOGIN
+============================================================
+
+Create real login.
+
+Fields:
+
+Email
+Password
+
+Features:
+
+- Show/hide password
+- Remember me
+- Forgot password
+- Login
+- Logout
+
+Backend must verify:
+
+Email
++
+Password hash
+
+Then generate JWT.
+
+Invalid credentials must show an appropriate error.
+
+============================================================
+8. GOOGLE OAUTH
+============================================================
+
+Implement REAL Google OAuth 2.0.
+
+"Continue with Google" must actually work.
+
+Flow:
+
+Google
+↓
+OAuth authentication
+↓
+Backend callback
+↓
+Find existing user OR create authorized account
+↓
+JWT/session
+↓
+User Dashboard
+
+Do NOT create a fake Google button.
+
+Clearly provide environment variables required for:
+
+GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET
+GOOGLE_CALLBACK_URL
+
+============================================================
+9. JWT AND PROTECTED ROUTES
+============================================================
+
+Use JWT authentication.
+
+Protected pages:
+
+/user/dashboard
+/user/profile
+/user/credentials
+/user/history
+/user/notifications
+/user/settings
+
+Admin pages:
+
+/admin/dashboard
+/admin/users
+/admin/credentials
+/admin/verifications
+/admin/analytics
+/admin/audit-logs
+
+Unauthenticated users must be redirected to login.
+
+Normal users must not access admin pages.
+
+Admin routes require role-based authorization.
+
+============================================================
+10. USER DASHBOARD
+============================================================
+
+Create a complete real-data dashboard.
+
+Cards:
+
+- Total Credentials
+- Active Credentials
+- Expired Credentials
+- Revoked Credentials
+- Total Verifications
+
+Sections:
+
+- My Digital Credentials
+- Recent Verification Activity
+- Recently Accessed
+- Notifications
+- Profile Summary
+- Quick Actions
+
+Quick Actions:
+
+- View Credentials
+- View QR
+- Verification History
+- Notifications
+- Profile
+- Settings
+
+ALL data must come from MongoDB.
+
+Do not hardcode numbers.
+
+============================================================
+11. USER PROFILE
+============================================================
+
+Profile page must display:
+
+- Profile photo
+- Name
+- Email
+- Phone
+- Date of Birth
+- Gender
+- Address
+- City
+- State
+- Country
+- User Type
+- Account status
+
+Allow permitted profile fields to be edited.
+
+Save changes to MongoDB.
+
+============================================================
+12. ADMIN LOGIN
+============================================================
+
+Create separate Admin Login.
+
+Admin authentication must use:
+
+JWT
++
+Role-based authorization
+
+Normal users cannot access admin dashboard.
+
+============================================================
+13. ADMIN DASHBOARD
+============================================================
+
+Admin dashboard must show REAL MongoDB data.
+
+Cards:
+
+- Total Users
+- Active Users
+- Total Credentials
+- Active Credentials
+- Expired Credentials
+- Revoked Credentials
+- Total Verifications
+- Invalid Verification Attempts
+
+Charts:
+
+- Verification activity
+- Credential status distribution
+- User registration trend
+- Verification result distribution
+- Monthly verification trend
+
+Recent activity:
+
+- Recently registered users
+- Recently issued credentials
+- Recently verified credentials
+- Recently revoked credentials
+- Recent invalid verification attempts
+
+No hardcoded statistics.
+
+============================================================
+14. USER MANAGEMENT
+============================================================
+
+Admin can:
+
+- View users
+- Search users
+- Filter users
+- View user details
+- Create users
+- Update users
+- Activate users
+- Deactivate users
+
+Use real MongoDB operations.
+
+Show confirmation before destructive operations.
+
+============================================================
+15. DIGITAL CREDENTIAL MANAGEMENT
+============================================================
+
+Admin is responsible for issuing official credentials.
+
+User must NOT create their own official credential.
+
+Admin can create:
+
+- Student Credential
+- Employee Credential
+- Training Certificate
+- Membership Credential
+- Event Credential
+- Participation Credential
+
+Credential fields:
+
+- Credential ID
+- Credential Title
+- Credential Type
+- Credential Number
+- Credential Holder
+- Organization
+- Issue Date
+- Expiry Date
+- Status
+
+Store everything in MongoDB.
+
+============================================================
+16. SECURE QR CODE GENERATION
+============================================================
+
+Every credential must receive a unique secure verification token.
+
+Generate a QR using:
+
+https://your-domain.com/verify/<secure-token>
+
+The QR must NOT contain:
+
+- Password
+- JWT secret
+- Database credentials
+- Private address
+- Sensitive personal information
+
+Only use the secure verification URL/token.
+
+Allow credential holder to:
+
+- View QR
+- Download QR
+- Print QR
+- Share verification link
+- Download digital credential
+
+============================================================
+17. PUBLIC QR SCANNER
+============================================================
+
+Create:
+
+/scanner
+
+The scanner must work using the device camera where supported.
+
+Flow:
+
+Scan QR
+↓
+Read verification URL/token
+↓
+Call backend
+↓
+Validate credential
+↓
+Show result
+
+Also provide manual verification by entering a verification token/link.
+
+No login required for public verification.
+
+============================================================
+18. PUBLIC VERIFICATION PAGE
+============================================================
+
+Create:
+
+/verify/:token
+
+This page must work without login.
+
+Backend must perform the actual verification.
+
+Verification logic:
+
+IF token does not exist:
+→ INVALID
+
+IF credential exists but status is REVOKED:
+→ REVOKED
+
+IF current date is greater than expiry date:
+→ EXPIRED
+
+IF credential exists and is active and not expired:
+→ VALID
+
+The backend must determine the result.
+
+Never trust frontend status.
+
+============================================================
+19. VERIFICATION RESULT
+============================================================
+
+VALID:
+
+Show:
+
+✓ Credential Verified
+
+- Credential Title
+- Credential Holder
+- Credential Number
+- Issuing Organization
+- Issue Date
+- Expiry Date
+- Verification Time
+- Status: VALID
+
+EXPIRED:
+
+Show:
+
+⚠ Credential Expired
+
+REVOKED:
+
+Show:
+
+🚫 Credential Revoked
+
+INVALID:
+
+Show:
+
+❌ Invalid Credential
+
+Do not expose unnecessary private information.
+
+============================================================
+20. VERIFICATION HISTORY
+============================================================
+
+Every verification attempt must be stored in MongoDB.
+
+Store:
+
+- Verification ID
+- Credential ID
+- Organization
+- Result
+- Verification Method
+- Verification Time
+- IP address where appropriate
+- User agent where appropriate
+- CreatedAt
+
+User sees history related to their credentials.
+
+Admin sees organization-wide verification history.
+
+Provide:
+
+- Search
+- Status filter
+- Date filter
+- Credential filter
+
+============================================================
+21. REAL-TIME EMAIL NOTIFICATION SYSTEM
+============================================================
+
+THIS IS A MAJOR FEATURE.
+
+After every QR verification:
+
+Backend verifies credential
+↓
+Saves verification record
+↓
+Determines result
+↓
+Triggers appropriate email
+↓
+Creates in-app notification
+↓
+Updates audit log
+
+Use a real email service.
+
+Use Nodemailer or another reliable email provider.
+
+Do NOT simulate emails.
+
+Environment variables:
+
+EMAIL_HOST=
+EMAIL_PORT=
+EMAIL_USER=
+EMAIL_PASSWORD=
+EMAIL_FROM=
+
+Create reusable email service functions:
+
+sendVerificationSuccessEmail()
+sendExpiredCredentialEmail()
+sendRevokedCredentialEmail()
+sendInvalidCredentialAlert()
+sendCredentialExpiryReminder()
+
+============================================================
+22. EMAIL ALERTS BY RESULT
+============================================================
+
+VALID:
+
+Send email to credential holder.
+
+Subject:
+
+"Digital Credential Successfully Verified"
+
+Message includes:
+
+- Credential title
+- Verification result
+- Verification date/time
+- Organization
+- Verification reference ID
+
+EXPIRED:
+
+Send email to credential holder and admin.
+
+Subject:
+
+"Expired Credential Verification Alert"
+
+Tell them that an expired credential was scanned.
+
+REVOKED:
+
+Send email to credential holder and admin.
+
+Subject:
+
+"Revoked Credential Verification Alert"
+
+Tell them that a revoked credential was scanned.
+
+INVALID:
+
+Send security alert to admin.
+
+Subject:
+
+"Invalid Credential Verification Attempt"
+
+Tell admin that an invalid QR/token verification attempt occurred.
+
+Do not expose unnecessary private information.
+
+============================================================
+23. IN-APP NOTIFICATION SYSTEM
+============================================================
+
+Create Notification collection in MongoDB.
+
+Notification fields:
+
+- userId
+- type
+- title
+- message
+- verificationId
+- isRead
+- createdAt
+
+Create:
+
+/user/notifications
+
+Features:
+
+- View notifications
+- Mark as read
+- Mark all as read
+- Unread notification count
+
+Navbar must show unread notification count.
+
+Notifications must be real database records.
+
+============================================================
+24. CREDENTIAL EXPIRY REMINDER
+============================================================
+
+Implement expiry reminders.
+
+If a credential is approaching expiry:
+
+Send email reminder to credential holder.
+
+Create in-app notification.
+
+Example:
+
+"Your digital credential will expire soon."
+
+Do not hardcode expiry reminders.
+
+Use real credential expiry dates.
+
+============================================================
+25. CREDENTIAL REVOCATION
+============================================================
+
+Admin can revoke a credential.
+
+Status:
+
+ACTIVE
+EXPIRED
+REVOKED
+
+Once revoked:
+
+ACTIVE → REVOKED
+
+A revoked credential must NEVER become VALID again.
+
+When revoked:
+
+- Save status in MongoDB
+- Create audit log
+- Notify credential holder
+- Send email
+- Update dashboard
+- Update analytics
+
+============================================================
+26. AUDIT LOG / SECURITY LOG
+============================================================
+
+Create AuditLog collection.
+
+Track:
+
+- Login
+- User creation
+- User update
+- Credential creation
+- Credential update
+- Credential revocation
+- Verification
+- Invalid verification attempt
+- Profile changes
+- Admin actions
+
+Admin can view audit logs.
+
+Include:
+
+- Action
+- Actor
+- Target
+- Date/time
+- Result
+- IP where appropriate
+
+============================================================
+27. RECENTLY ACCESSED / RECENT ACTIVITY
+============================================================
+
+Create real Recent Activity section.
+
+Show:
+
+- Recently verified credentials
+- Recently issued credentials
+- Recently revoked credentials
+- Recently registered users
+- Recent profile changes
+
+Use MongoDB records.
+
+Do not use fake activity.
+
+============================================================
+28. ANALYTICS
+============================================================
+
+Create Admin Analytics page.
+
+Display:
+
+- Total verification attempts
+- Valid verifications
+- Expired verifications
+- Revoked verifications
+- Invalid attempts
+- Verification trends
+- Credential status distribution
+- Credential type distribution
+- Monthly verification activity
+
+Use MongoDB aggregation.
+
+Use Recharts.
+
+No hardcoded chart data.
+
+============================================================
+29. SEARCH AND FILTER
+============================================================
+
+Implement real search/filter for:
+
+- Users
+- Credentials
+- Verification History
+- Notifications
+- Audit Logs
+
+Search/filter must operate on actual data.
+
+============================================================
+30. DIGITAL CREDENTIAL PAGE
+============================================================
+
+Create a professional digital credential card.
+
+Show:
+
+- Organization logo/name
+- Credential title
+- Holder name
+- Credential number
+- Issue date
+- Expiry date
+- Status
+- QR code
+
+Actions:
+
+- Download
+- Print
+- Share
+- View verification page
+
+Make it look like a real digital credential.
+
+============================================================
+31. MULTILINGUAL SUPPORT
+============================================================
+
+Implement:
+
+English
+Tamil
+Hindi
+
+Language selector must work.
+
+When language changes:
+
+- Navigation changes
+- Buttons change
+- Labels change
+- Messages change
+- Notifications interface changes
+
+Use i18next.
+
+============================================================
+32. SECURITY
+============================================================
+
+Implement:
+
+- JWT
+- bcrypt password hashing
+- Role-based authorization
+- Protected routes
+- Input validation
+- Rate limiting
+- CORS
+- Environment variables
+- Secure token generation
+- No secrets in frontend
+- No database credentials in frontend
+- No sensitive data inside QR
+- Secure API error handling
+
+============================================================
+33. DATABASE MODELS
+============================================================
+
+Create proper Mongoose models.
+
+Organization:
+
+- organizationId
+- name
+- type
+- email
+- phone
+- address
+- website
+- status
+- createdAt
+- updatedAt
+
+User:
+
+- userId
+- organizationId
+- name
+- email
+- passwordHash
+- googleId
+- phone
+- dateOfBirth
+- gender
+- address
+- city
+- state
+- country
+- profileImage
+- userType
+- role
+- status
+- createdAt
+- updatedAt
+
+Credential:
+
+- credentialId
+- organizationId
+- userId
+- credentialType
+- credentialTitle
+- credentialNumber
+- issueDate
+- expiryDate
+- verificationToken
+- status
+- createdAt
+- updatedAt
+
+Verification:
+
+- verificationId
+- credentialId
+- organizationId
+- result
+- verificationMethod
+- verificationTime
+- ipAddress
+- userAgent
+- createdAt
+
+Notification:
+
+- notificationId
+- userId
+- type
+- title
+- message
+- verificationId
+- isRead
+- createdAt
+
+AuditLog:
+
+- auditId
+- actorId
+- action
+- targetType
+- targetId
+- result
+- ipAddress
+- userAgent
+- createdAt
+
+============================================================
+34. REST API
+============================================================
+
+AUTH:
+
+POST /api/auth/register
+POST /api/auth/login
+GET /api/auth/google
+GET /api/auth/google/callback
+GET /api/auth/me
+POST /api/auth/forgot-password
+POST /api/auth/reset-password
+
+USERS:
+
+GET /api/users/me
+PUT /api/users/me
+GET /api/users/credentials
+GET /api/users/history
+
+ADMIN:
+
+GET /api/admin/dashboard
+GET /api/admin/users
+POST /api/admin/users
+PUT /api/admin/users/:id
+PATCH /api/admin/users/:id/status
+GET /api/admin/audit-logs
+
+CREDENTIALS:
+
+POST /api/credentials
+GET /api/credentials
+GET /api/credentials/:id
+PUT /api/credentials/:id
+PATCH /api/credentials/:id/revoke
+
+VERIFICATION:
+
+GET /api/verify/:token
+POST /api/verifications
+GET /api/verifications
+GET /api/verifications/:id
+
+NOTIFICATIONS:
+
+GET /api/notifications
+PATCH /api/notifications/:id/read
+
+============================================================
+35. FRONTEND ROUTES
+============================================================
+
+PUBLIC:
+
+/
+ /login
+ /register
+ /forgot-password
+ /reset-password
+ /scanner
+ /verify/:token
+
+USER:
+
+/user/dashboard
+/user/profile
+/user/credentials
+/user/credentials/:id
+/user/history
+/user/notifications
+/user/settings
+
+ADMIN:
+
+/admin/login
+/admin/dashboard
+/admin/users
+/admin/credentials
+/admin/credentials/create
+/admin/verifications
+/admin/analytics
+/admin/audit-logs
+/admin/settings
+
+============================================================
+36. UI DESIGN
+============================================================
+
+The website must NOT look like a basic college CRUD project.
+
+Use:
+
+- Colorful modern design
+- Professional gradients
+- Clean typography
+- Cards
+- Rounded components
+- Icons
+- Smooth animations
+- Responsive layout
+- Sidebar
+- Navbar
+- Tables
+- Charts
+- Status badges
+- Toast notifications
+- Modal dialogs
+- Proper spacing
+- Mobile responsive design
+
+Maintain one consistent design system throughout the application.
+
+============================================================
+37. LOADING / EMPTY / ERROR STATES
+============================================================
+
+Every major page must handle:
+
+- Loading
+- Empty data
+- API failure
+- Network error
+- Unauthorized access
+- Invalid QR
+- Expired session
+- Server error
+
+Never show a blank page.
+
+============================================================
+38. NO FAKE DATA
+============================================================
+
+STRICT RULE:
+
+Do not use:
+
+- Fake dashboard statistics
+- Fake users
+- Fake credentials
+- Fake verification history
+- Fake notifications
+- Fake analytics
+- Fake Google login
+- Fake email notification
+- Fake API response
+
+Everything important must come from MongoDB/backend.
+
+============================================================
+39. FIVE REAL USER TEST
+============================================================
+
+The application must support at least 5 real users.
+
+Create them using the actual registration flow.
+
+Do not hardcode them.
+
+Test:
+
+User 1
+User 2
+User 3
+User 4
+User 5
+
+Admin must be able to see these users in the admin dashboard.
+
+============================================================
+40. COMPLETE END-TO-END TEST
+============================================================
+
+Perform this complete scenario:
+
+1. Open website
+2. Register user
+3. Store user in MongoDB
+4. Login
+5. Test Google OAuth
+6. Open dashboard
+7. Update profile
+8. Admin login
+9. Admin sees user
+10. Admin issues credential
+11. Credential stored in MongoDB
+12. Secure QR generated
+13. User sees QR
+14. Public verifier scans QR
+15. Backend validates QR
+16. Show VALID
+17. Save verification
+18. Send VALID email
+19. Create in-app notification
+20. Admin sees verification
+21. Admin revokes credential
+22. Send revoked notification/email
+23. Scan same QR
+24. Show REVOKED
+25. Create audit log
+26. Test expired credential
+27. Show EXPIRED
+28. Send expiry email/notification
+29. Test random token
+30. Show INVALID
+31. Send security alert to admin
+32. Create invalid-attempt audit log
+33. Check verification history
+34. Check notifications
+35. Check analytics
+36. Check recently accessed
+37. Test search
+38. Test filters
+39. Test Tamil
+40. Test Hindi
+41. Test mobile layout
+42. Logout
+43. Try protected URL
+44. Redirect to login
+
+============================================================
+41. UNIQUE PROJECT FEATURE
+============================================================
+
+The major unique feature is:
+
+LIVE QR-BASED DIGITAL CREDENTIAL TRUST VERIFICATION
+
+The system combines:
+
+Secure Credential Issuance
++
+Unique Verification Token
++
+QR Code
++
+Live MongoDB Validation
++
+Expiry Detection
++
+Revocation Detection
++
+Invalid Token Detection
++
+Verification History
++
+Real-Time Email Alerts
++
+In-App Notifications
++
+Security Audit Logs
++
+Analytics
+
+Therefore this project is NOT merely a QR generator.
+
+============================================================
+42. PROJECT STRUCTURE
+============================================================
+
+Use:
+
+frontend/
+  src/
+    components/
+    pages/
+    layouts/
+    services/
+    hooks/
+    context/
+    utils/
+    routes/
+    i18n/
+
+backend/
+  controllers/
+  models/
+  routes/
+  middleware/
+  services/
+  utils/
+  config/
+  validators/
+
+Keep frontend and backend clearly separated.
+
+============================================================
+43. ENVIRONMENT VARIABLES
+============================================================
+
+Provide a clear .env.example.
+
+Frontend:
+
+VITE_API_URL=
+
+Backend:
+
+PORT=
+MONGO_URI=
+JWT_SECRET=
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_CALLBACK_URL=
+
+EMAIL_HOST=
+EMAIL_PORT=
+EMAIL_USER=
+EMAIL_PASSWORD=
+EMAIL_FROM=
+
+Never expose backend secrets in frontend.
+
+============================================================
+44. IMPORTANT DEVELOPMENT RULE
+============================================================
+
+Do NOT generate all pages as disconnected UI screens.
+
+Build feature-by-feature.
+
+For every feature:
+
+Frontend
+↓
+API
+↓
+Controller
+↓
+Service
+↓
+Model
+↓
+MongoDB
+
+must be connected.
+
+============================================================
+45. DEVELOPMENT PHASES
+============================================================
+
+PHASE 1:
+Project setup
+Landing page
+Login
+Registration
+Routing
+UI design
+
+PHASE 2:
+Backend
+MongoDB
+Mongoose
+Registration API
+
+PHASE 3:
+Email/password login
+JWT
+Protected routes
+
+PHASE 4:
+Google OAuth
+
+PHASE 5:
+User profile
+
+PHASE 6:
+User dashboard
+
+PHASE 7:
+Admin authentication
+
+PHASE 8:
+Admin dashboard
+
+PHASE 9:
+User management
+
+PHASE 10:
+Credential management
+
+PHASE 11:
+Secure QR generation
+
+PHASE 12:
+QR scanner
+
+PHASE 13:
+Public verification
+
+PHASE 14:
+VALID / EXPIRED / REVOKED / INVALID logic
+
+PHASE 15:
+Verification history
+
+PHASE 16:
+Email notification system
+
+PHASE 17:
+In-app notifications
+
+PHASE 18:
+Credential expiry reminders
+
+PHASE 19:
+Recently accessed/recent activity
+
+PHASE 20:
+Audit logs
+
+PHASE 21:
+Analytics
+
+PHASE 22:
+Search and filters
+
+PHASE 23:
+Tamil / English / Hindi
+
+PHASE 24:
+Security hardening
+
+PHASE 25:
+Responsive UI
+
+PHASE 26:
+Complete end-to-end testing
+
+============================================================
+46. FINAL CRITICAL INSTRUCTION
+============================================================
+
+The project is NOT complete just because pages are generated.
+
+The project is complete ONLY when:
+
+Frontend works
+AND
+Backend works
+AND
+MongoDB works
+AND
+Registration works
+AND
+Login works
+AND
+Google OAuth works
+AND
+JWT works
+AND
+Admin works
+AND
+User management works
+AND
+Credential issuance works
+AND
+QR generation works
+AND
+QR scanner works
+AND
+Public verification works
+AND
+VALID/EXPIRED/REVOKED/INVALID works
+AND
+Verification history works
+AND
+Real email notifications work
+AND
+In-app notifications work
+AND
+Expiry reminders work
+AND
+Audit logs work
+AND
+Analytics work
+AND
+Search/filter works
+AND
+Multilingual works
+AND
+Responsive UI works.
+
+Every important button must perform a real action.
+
+Never say "this can be implemented later."
+
+If external configuration is required, clearly explain exactly what must be configured.
+
+Do not use fake data to make the UI look complete.
+
+START WITH PHASE 1 ONLY.
+
+After Phase 1 is successfully working, STOP and wait for my confirmation before continuing to Phase 2.
+
+DO NOT BUILD A STATIC DEMO.
+
+BUILD A REAL, CONNECTED, FUNCTIONAL APPLICATION.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-10-06T15:10:00+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Users\J KARTHIKA\OneDrive\Desktop\digital-verification-qr\backend\.env (LANGUAGE_UNSPECIFIED)
+Cursor is on line: 10
+Other open documents:
+- c:\Users\J KARTHIKA\OneDrive\Desktop\digital-verification-qr\backend\controllers\verificationController.js (LANGUAGE_JAVASCRIPT)
+- c:\Users\J KARTHIKA\OneDrive\Desktop\digital-verification-qr\backend\test_phase2_register_endpoint.js (LANGUAGE_JAVASCRIPT)
+- c:\Users\J KARTHIKA\OneDrive\Desktop\digital-verification-qr\src\pages\SettingsPage.jsx (LANGUAGE_JAVASCRIPT)
+- c:\Users\J KARTHIKA\OneDrive\Desktop\digital-verification-qr\src\pages\AdminSecurityPage.jsx (LANGUAGE_JAVASCRIPT)
+- c:\Users\J KARTHIKA\OneDrive\Desktop\digital-verification-qr\src\components\verification\VerificationResult.jsx (LANGUAGE_JAVASCRIPT)
+</ADDITIONAL_METADATA>

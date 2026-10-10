@@ -1,0 +1,16 @@
+{
+  "name": "digital-verification-qr",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "node backend/server.js",
+    "build": "npm run build --prefix frontend",
+    "server": "node backend/server.js",
+    "seed": "node backend/seed.js",
+    "test:features": "node backend/test_mandatory_features.js",
+    "test:e2e": "node backend/test_19_steps_e2e.js"
+  }
+}
