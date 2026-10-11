@@ -1,20 +1,13 @@
-# Backend Dockerfile - Node.js Express REST API
-FROM node:20-alpine
-
+# Backend Dockerfile
+# Use a lightweight Node.js image
+FROM node:18-alpine AS builder
 WORKDIR /app
-
-# Install dependencies first for optimal caching
+# Install only production dependencies
 COPY package*.json ./
-RUN npm install --omit=dev
-
-# Copy application source code
+RUN npm ci --only=production
+# Copy source code
 COPY . .
-
-# Expose backend REST port
+# Expose the port the server runs on
 EXPOSE 5000
-
-ENV NODE_ENV=production
-ENV PORT=5000
-
-# Start Express server
-CMD ["node", "server.js"]
+# Start the server
+CMD ["node","server.js"]

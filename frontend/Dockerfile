@@ -1,23 +1,18 @@
-# Multi-stage Dockerfile for React Vite Frontend
-# Stage 1: Build static bundle
-FROM node:20-alpine AS build
-
+# Frontend Dockerfile (Vite React)
+# Build the static assets and serve them via a lightweight nginx
+FROM node:18-alpine AS builder
 WORKDIR /app
-
+# Install dependencies
 COPY package*.json ./
-RUN npm install
-
+RUN npm ci --only=production
+# Copy source code
 COPY . .
-
-# Build Vite SPA production bundle
+# Build the Vite app
 RUN npm run build
 
-# Stage 2: Production Nginx Server
+# Production image
 FROM nginx:alpine
-
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
+COPY --from=builder /app/dist /usr/share/nginx/html
+# Expose port 80 (default for nginx)
 EXPOSE 80
-
 CMD ["nginx", "-g", "daemon off;"]
